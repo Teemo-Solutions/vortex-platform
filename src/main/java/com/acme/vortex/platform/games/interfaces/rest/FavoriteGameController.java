@@ -57,7 +57,7 @@ public class FavoriteGameController {
 
     private ResponseEntity<List<FavoriteGameResource>> getAllFavoriteGameByName(String name) {
         var getAllFavoriteGameByNameQuery  = new GetAllFavoriteGamesByNameQuery(name);
-        var favoriteGames = favoriteGameQueryService.handle(getAllFavoriteGameByNameQuery):
+        var favoriteGames = favoriteGameQueryService.handle(getAllFavoriteGameByNameQuery);
         if(favoriteGames.isEmpty())
             return ResponseEntity.notFound().build();
 
