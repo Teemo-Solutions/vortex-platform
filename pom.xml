@@ -30,34 +30,38 @@
         <java.version>23</java.version>
     </properties>
     <dependencies>
+        <!-- Dependencia para agregar soporte de validación a una aplicación Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+            <!-- Dependencia para crear aplicaciones web con Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-        <!-- Dependencia para crear aplicaciones web con Spring Boot -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
+            <!-- Dependencia para herramientas de desarrollo en Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
 
-        <!-- Dependencia para herramientas de desarrollo en Spring Boot -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <scope>runtime</scope>
-        <optional>true</optional>
-    </dependency>
+            <!-- Dependencia para la librería Lombok, que reduce el código boilerplate -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
-        <!-- Dependencia para la librería Lombok, que reduce el código boilerplate -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
-
-        <!-- Dependencia para pruebas unitarias y de integración con Spring Boot -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
+            <!-- Dependencia para pruebas unitarias y de integración con Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Para poder conectar la aplicación a la base de datos MySQL y hacer consultas  -->
         <dependency>
@@ -73,10 +77,11 @@
         </dependency>
 
         <!--- Librería para documentar la API-->
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starte-webmvc-ui -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
+            <version>2.6.0</version>
         </dependency>
 
         <!--- Librería para pluralizar palabras-->
@@ -85,7 +90,6 @@
             <artifactId>pluralize</artifactId>
             <version>1.0.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
