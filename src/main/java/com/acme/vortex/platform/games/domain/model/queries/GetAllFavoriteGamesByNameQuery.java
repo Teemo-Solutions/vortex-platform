@@ -1,4 +1,4 @@
-package com.acme.vortex.platform.games;
+package com.acme.vortex.platform.games.domain.model.queries;
 
 public record GetAllFavoriteGamesByNameQuery(String name) {
     public GetAllFavoriteGamesByNameQuery {
