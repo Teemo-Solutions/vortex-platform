@@ -1,5 +1,6 @@
-package com.acme.vortex.platform.games;
+package com.acme.vortex.platform.games.domain.model.aggregates;
 
+import com.acme.vortex.platform.games.domain.model.commands.CreateFavoriteGameCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -41,5 +42,16 @@ public class FavoriteGame extends AbstractAggregateRoot<FavoriteGame> {
     @LastModifiedDate
     private Date updatedAt;
 
-    protected FavoriteGame(){}
+    protected FavoriteGame() {}
+
+    /**
+     * @summary Constructor for FavoriteGame
+     * It creates a new FavoriteGame instance based on the CreateFavoriteGameCommand command.
+     * @param command - The CreateFavoriteGameCommand command
+     */
+
+    public FavoriteGame(CreateFavoriteGameCommand command){
+        this.name = command.name();
+        this.image = command.image();
+    }
 }
