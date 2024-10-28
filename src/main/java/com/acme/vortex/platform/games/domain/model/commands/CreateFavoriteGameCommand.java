@@ -1,4 +1,4 @@
-package com.acme.vortex.platform.games;
+package com.acme.vortex.platform.games.domain.model.commands;
 
 public record CreateFavoriteGameCommand(String name, String image) {
     public CreateFavoriteGameCommand {
