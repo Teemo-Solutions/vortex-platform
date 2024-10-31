@@ -4,9 +4,11 @@ import com.acme.vortex.platform.games.domain.model.aggregates.FavoriteGame;
 import com.acme.vortex.platform.games.domain.model.commands.CreateFavoriteGameCommand;
 import com.acme.vortex.platform.games.domain.services.FavoriteGameCommandService;
 import com.acme.vortex.platform.games.infrastructure.persistence.jpa.FavoriteGameRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class FavoriteGameCommandServiceImpl implements FavoriteGameCommandService {
     private final FavoriteGameRepository favoriteGameRepository;
 
