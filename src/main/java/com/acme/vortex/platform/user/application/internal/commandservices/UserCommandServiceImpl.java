@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class FavoriteGameCommandServiceImpl implements UserCommandService {
+public class UserCommandServiceImpl implements UserCommandService {
     private final UserRepository userRepository;
 
     public UserCommandServiceImpl(UserRepository userRepository) {
@@ -23,7 +23,7 @@ public class FavoriteGameCommandServiceImpl implements UserCommandService {
     @Override
     public Optional<User> handle(CreateUserCommand command) {
         if(userRepository.existsByEmail(command.email()))
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Favorite game with same name and image already exists");
         var user = new User(command);
         var createUser = userRepository.save(user);
         return Optional.of(createUser);
