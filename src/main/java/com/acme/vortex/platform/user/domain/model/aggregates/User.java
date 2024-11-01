@@ -64,5 +64,11 @@ public class User extends AbstractAggregateRoot<User> {
 
     public User(CreateUserCommand command){
         this.name = command.name();
+        this.email = command.email();
+        this.password = command.password();
+        this.birthDate = command.birthDate();
+        this.role = command.role();
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 }
