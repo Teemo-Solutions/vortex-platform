@@ -6,6 +6,13 @@ import com.acme.vortex.platform.subscription.domain.models.queries.GetSubscripti
 import com.acme.vortex.platform.subscription.domain.models.queries.GetSubscriptionByUserIdAndPlanIdQuery;
 import com.acme.vortex.platform.subscription.domain.services.SubscriptionQueryService;
 import com.acme.vortex.platform.subscription.infrastructure.persistence.jpa.repositories.SubscriptionRepository;
+
+import com.acme.vortex.platform.subscription.domain.models.aggregates.Subscription;
+import com.acme.vortex.platform.subscription.domain.models.queries.GetAllSubscriptionsQuery;
+import com.acme.vortex.platform.subscription.domain.models.queries.GetSubscriptionByIdQuery;
+import com.acme.vortex.platform.subscription.domain.models.queries.GetSubscriptionByUserIdAndPlanIdQuery;
+import com.acme.vortex.platform.subscription.domain.services.SubscriptionQueryService;
+import com.acme.vortex.platform.subscription.infrastructure.persistence.jpa.repositories.SubscriptionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

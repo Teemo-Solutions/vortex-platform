@@ -1,5 +1,10 @@
 package com.acme.vortex.platform.subscription.application.internal.queryservices;
 
+import com.acme.vortex.platform.subscription.domain.models.aggregates.Payment;
+import com.acme.vortex.platform.subscription.domain.models.queries.GetPaymentByIdQuery;
+import com.acme.vortex.platform.subscription.domain.models.queries.GetAllPaymentsQuery;
+import com.acme.vortex.platform.subscription.domain.services.PaymentQueryService;
+import com.acme.vortex.platform.subscription.infrastructure.persistence.jpa.repositories.PaymentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
