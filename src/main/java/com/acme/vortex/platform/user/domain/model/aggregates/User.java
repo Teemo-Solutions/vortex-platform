@@ -44,7 +44,7 @@ public class User extends AbstractAggregateRoot<User> {
 
     @Column(nullable = false)
     @Getter
-    private Integer role;
+    private String role;
 
     @Column(nullable = false, updatable = false)
     @CreatedDate
