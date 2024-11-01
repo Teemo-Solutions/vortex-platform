@@ -1,7 +1,7 @@
-package com.acme.vortex.platform.user.domain.model.commands;
+package com.acme.vortex.platform.user.interfaces.rest.resources;
 
-public record CreateUserCommand(String name, String email, String password, String role, String birthDate) {
-    public CreateUserCommand {
+public record CreateUserResource(String name, String email, String password, String role, String birthDate) {
+    public CreateUserResource {
         if (name == null || name.isBlank())
             throw new IllegalArgumentException("name cannot be null or empty");
 
