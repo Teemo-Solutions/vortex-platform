@@ -14,7 +14,7 @@ public record CreateUserResource(String name, String email, String password, Str
         if (role == null || role.isBlank())
             throw new IllegalArgumentException("role cannot be null or empty");
 
-        if (birthDate == null)
+        if (birthDate == null || birthDate.isBlank())
             throw new IllegalArgumentException("birthDate cannot be null");
 
     }
