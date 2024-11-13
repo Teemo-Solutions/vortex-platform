@@ -4,6 +4,16 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Incluir Dockerfile y railway.toml para Railway
+!Dockerfile
+!railway.toml
+
+# Incluir archivos de configuración de Maven y Gradle
+!pom.xml
+!build.gradle
+!mvnw
+!.mvn/wrapper/maven-wrapper.properties
+
 ### STS ###
 .apt_generated
 .classpath
