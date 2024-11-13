@@ -36,4 +36,48 @@ public class Game {
         this.downloads = downloads;
         this.imageUrl = imageUrl;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDeveloper() {
+        return developer;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getPlatforms() {
+        return platforms;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public Long getDownloads() {
+        return downloads;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

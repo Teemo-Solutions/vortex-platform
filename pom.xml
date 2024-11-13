@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.acme</groupId>
-    <artifactId>vortex-platform</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>vortex-platform</name>
-    <description>vortex-platform</description>
+    <artifactId>vortex_platform</artifactId>
+    <version>0.0.1</version>
+    <name>vortex_platform</name>
+    <description>vortex_platform</description>
     <url/>
     <licenses>
         <license/>

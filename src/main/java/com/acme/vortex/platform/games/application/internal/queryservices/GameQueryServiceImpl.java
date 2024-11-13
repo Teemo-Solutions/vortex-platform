@@ -1,9 +1,10 @@
-package com.acme.vortex.platform.games.domain.services;
+package com.acme.vortex.platform.games.application.internal.queryservices;
 
 import com.acme.vortex.platform.games.domain.model.aggregates.Game;
 import com.acme.vortex.platform.games.domain.model.queries.GetAllGamesByTitleQuery;
 import com.acme.vortex.platform.games.domain.model.queries.GetGameByIdQuery;
 import com.acme.vortex.platform.games.domain.model.queries.GetGameByTitleAndDeveloperQuery;
+import com.acme.vortex.platform.games.domain.services.GameQueryService;
 import com.acme.vortex.platform.games.infrastructure.persistence.jpa.GameRepository;
 import org.springframework.stereotype.Service;
 
