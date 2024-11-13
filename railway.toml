@@ -2,4 +2,4 @@
 command = "./mvnw clean package -DskipTests"
 
 [start]
-command = "java -jar target/vortex_platform.jar"
+command = "java -jar target/vortex_platform-0.0.1.jar"
