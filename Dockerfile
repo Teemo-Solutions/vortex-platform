@@ -5,11 +5,16 @@ FROM openjdk:23-jdk
 WORKDIR /app
 
 # Copia el archivo de configuración de Maven y el código fuente
+COPY .mvn/ .mvn/
+COPY mvnw mvnw
 COPY pom.xml .
 COPY src ./src
 
-# Compila el proyecto y genera el archivo JAR
+# Ejecuta Maven para compilar el proyecto y generar el JAR
 RUN ./mvnw clean package -DskipTests
+
+# Verifica que el archivo JAR se ha generado
+RUN ls -l target/
 
 # Copia el archivo JAR generado
 COPY target/vortex_platform-0.0.1.jar app.jar
