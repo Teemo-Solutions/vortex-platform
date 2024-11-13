@@ -1,5 +1,5 @@
-FROM openjdk:23
-ARG JAR_FILE=target/vortex_platform-0.0.1.jar
-COPY ${JAR_FILE} app_vortex.jar
+FROM eclipse-temurin:23-jdk
+WORKDIR /app
+COPY target/vortex_platform.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app_vortex.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
