@@ -2,6 +2,7 @@ package com.acme.vortex.platform.games.interfaces.rest;
 
 import com.acme.vortex.platform.games.domain.model.aggregates.Game;
 import com.acme.vortex.platform.games.domain.model.queries.GetAllGamesByTitleQuery;
+import com.acme.vortex.platform.games.domain.model.queries.GetAllGamesQuery;
 import com.acme.vortex.platform.games.domain.model.queries.GetGameByIdQuery;
 import com.acme.vortex.platform.games.domain.model.queries.GetGameByTitleAndDeveloperQuery;
 import com.acme.vortex.platform.games.domain.services.GameCommandService;
@@ -10,6 +11,7 @@ import com.acme.vortex.platform.games.interfaces.rest.resources.CreateGameResour
 import com.acme.vortex.platform.games.interfaces.rest.resources.GameResource;
 import com.acme.vortex.platform.games.interfaces.rest.transform.CreateGameCommandFromResourceAssembler;
 import com.acme.vortex.platform.games.interfaces.rest.transform.GameResourceFromEntityAssembler;
+import io.swagger.models.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -77,15 +79,13 @@ public class GameController {
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
     @GetMapping
-    public ResponseEntity<?> getGamesWithParameters(@Parameter(name = "params", hidden = true)
-                                                    @RequestParam Map<String, String> params) {
-        if (params.containsKey("title") && params.containsKey("developer")) {
-            return getGameByTitleAndDeveloper(params.get("title"), params.get("developer"));
-        } else if (params.containsKey("title")) {
-            return getAllGamesByTitle(params.get("title"));
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<List<GameResource>> getAllGames(){
+        var games = gameQueryService.handle(new GetAllGamesQuery());
+        if (games.isEmpty()) return ResponseEntity.notFound().build();
+        var gameResources = games.stream()
+                .map(GameResourceFromEntityAssembler::toResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(gameResources);
     }
 
     private ResponseEntity<List<GameResource>> getAllGamesByTitle(String title) {
