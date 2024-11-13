@@ -4,10 +4,18 @@ FROM openjdk:23-jdk
 # Establece el directorio de trabajo
 WORKDIR /app
 
+# Otorga permisos de ejecución al archivo mvnw
+RUN chmod +x mvnw
+
+
 # Copia Maven Wrapper y archivos de configuración
 COPY .mvn/ .mvn/
 COPY mvnw mvnw
 COPY pom.xml .
+
+# Otorga permisos de ejecución al archivo mvnw
+RUN chmod +x mvnw
+
 
 # Instala dependencias y construye el proyecto
 RUN ./mvnw clean package -DskipTests
