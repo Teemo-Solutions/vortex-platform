@@ -4,20 +4,19 @@ FROM openjdk:23-jdk
 # Establece el directorio de trabajo
 WORKDIR /app
 
-# Copia el archivo de configuración de Maven y el código fuente
+# Copia Maven Wrapper y archivos de configuración
 COPY .mvn/ .mvn/
 COPY mvnw mvnw
 COPY pom.xml .
-COPY src ./src
 
-# Ejecuta Maven para compilar el proyecto y generar el JAR
+# Instala dependencias y construye el proyecto
 RUN ./mvnw clean package -DskipTests
 
-# Verifica que el archivo JAR se ha generado
+# Verifica si el archivo JAR está presente
 RUN ls -l target/
 
-# Copia el archivo JAR generado
-COPY target/vortex_platform-0.0.1.jar app.jar
+# Copia el archivo JAR generado al contenedor
+COPY target/*.jar app.jar
 
 # Expone el puerto 8080
 EXPOSE 8080
