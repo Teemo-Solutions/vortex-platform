@@ -1,5 +1,5 @@
-# Usa la imagen base de Eclipse Temurin para Java 23
-FROM eclipse-temurin:23-jdk
+# Usa la imagen base de OpenJDK para Java 23
+FROM openjdk:23-jdk
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -8,14 +8,14 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Ejecuta Maven para compilar el proyecto y generar el archivo JAR
+# Compila el proyecto y genera el archivo JAR
 RUN ./mvnw clean package -DskipTests
 
-# Copia el archivo JAR generado al contenedor
+# Copia el archivo JAR generado
 COPY target/vortex_platform-0.0.1.jar app.jar
 
-# Exponer el puerto 8080
+# Expone el puerto 8080
 EXPOSE 8080
 
-# Ejecutar la aplicación
+# Ejecuta la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
