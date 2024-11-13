@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Getter
 @Entity
 public class Game {
@@ -22,6 +21,9 @@ public class Game {
     private Double rating;
     private Long downloads;
     private String imageUrl;
+
+    public Game() {
+    }
 
     public Game(String title, String description, String developer, String publisher, String releaseDate,
                 String genre, String platforms, Double rating, Long downloads, String imageUrl) {
