@@ -1,9 +1,0 @@
-[phases]
-setup = { cmd = "./mvnw clean install" }
-
-[build]
-builder = "maven"
-cmd = "./mvnw package"
-
-[start]
-cmd = "java -jar target/tu-backend.jar"
