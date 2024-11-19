@@ -1,0 +1,9 @@
+[phases]
+setup = "mvn install"
+
+[build]
+builder = "maven"
+build = "mvn package"
+
+[start]
+cmd = "java -jar target/tu-backend.jar"
