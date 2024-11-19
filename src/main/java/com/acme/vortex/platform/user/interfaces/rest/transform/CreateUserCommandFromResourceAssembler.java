@@ -5,6 +5,6 @@ import com.acme.vortex.platform.user.interfaces.rest.resources.CreateUserResourc
 
 public class CreateUserCommandFromResourceAssembler {
     public  static CreateUserCommand toCommand(CreateUserResource resource){
-        return new CreateUserCommand(resource.email(), resource.name(), resource.password(), resource.role(), resource.birthDate());
+        return new CreateUserCommand(resource.name(), resource.email(), resource.password(), resource.role(), resource.birthDate());
     }
 }
