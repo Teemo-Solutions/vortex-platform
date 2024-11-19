@@ -1,6 +1,7 @@
 package com.acme.vortex.platform.games.interfaces.rest;
 
 import com.acme.vortex.platform.games.domain.model.aggregates.Game;
+import com.acme.vortex.platform.games.domain.model.commands.DeleteGameCommand;
 import com.acme.vortex.platform.games.domain.model.queries.GetAllGamesByTitleQuery;
 import com.acme.vortex.platform.games.domain.model.queries.GetAllGamesQuery;
 import com.acme.vortex.platform.games.domain.model.queries.GetGameByIdQuery;
@@ -9,8 +10,10 @@ import com.acme.vortex.platform.games.domain.services.GameCommandService;
 import com.acme.vortex.platform.games.domain.services.GameQueryService;
 import com.acme.vortex.platform.games.interfaces.rest.resources.CreateGameResource;
 import com.acme.vortex.platform.games.interfaces.rest.resources.GameResource;
+import com.acme.vortex.platform.games.interfaces.rest.resources.UpdateGameResource;
 import com.acme.vortex.platform.games.interfaces.rest.transform.CreateGameCommandFromResourceAssembler;
 import com.acme.vortex.platform.games.interfaces.rest.transform.GameResourceFromEntityAssembler;
+import com.acme.vortex.platform.games.interfaces.rest.transform.UpdateGameCommandFromResourceAssembler;
 import io.swagger.models.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,6 +42,14 @@ public class GameController {
         this.gameQueryService = gameQueryService;
     }
 
+    // post a game
+    /**
+     * Create a game
+     *
+     * @param resource The {@link CreateGameResource} instance
+     * @return The {@link GameResource} resource for the created game
+     */
+    @PostMapping
     @Operation(
             summary = "Create a game",
             description = "Create a game with the provided details"
@@ -47,7 +58,6 @@ public class GameController {
             @ApiResponse(responseCode = "201", description = "Game created"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
-    @PostMapping
     public ResponseEntity<GameResource> createGame(@RequestBody CreateGameResource resource) {
         Optional<Game> game = gameCommandService
                 .handle(CreateGameCommandFromResourceAssembler.toCommand(resource));
@@ -55,6 +65,12 @@ public class GameController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    /**
+     * Get a game by ID
+     * @param id The game id
+     * @return The {@link GameResource} resource for the game
+     */
+    @GetMapping("{id}")
     @Operation(
             summary = "Get a game by ID",
             description = "Get a game by the provided ID"
@@ -63,13 +79,19 @@ public class GameController {
             @ApiResponse(responseCode = "200", description = "Game found"),
             @ApiResponse(responseCode = "404", description = "Game not found"),
     })
-    @GetMapping("{id}")
     public ResponseEntity<GameResource> getGameById(@PathVariable Long id) {
         Optional<Game> game = gameQueryService.handle(new GetGameByIdQuery(id));
         return game.map(g -> ResponseEntity.ok(GameResourceFromEntityAssembler.toResourceFromEntity(g)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    // get all games
+    /**
+     * Get games with parameters
+     *
+     * @return The list of {@link GameResource} resources
+     */
+    @GetMapping
     @Operation(
             summary = "Get games with parameters",
             description = "Get games with the provided parameters"
@@ -78,7 +100,6 @@ public class GameController {
             @ApiResponse(responseCode = "200", description = "Games found"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
-    @GetMapping
     public ResponseEntity<List<GameResource>> getAllGames(){
         var games = gameQueryService.handle(new GetAllGamesQuery());
         if (games.isEmpty()) return ResponseEntity.notFound().build();
@@ -105,5 +126,51 @@ public class GameController {
         var game = gameQueryService.handle(getGameByTitleAndDeveloperQuery);
         return game.map(g -> ResponseEntity.ok(GameResourceFromEntityAssembler.toResourceFromEntity(g)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Update a game
+     *
+     * @param gameId The game id
+     * @param resource The {@link UpdateGameResource} instance
+     * @return The {@link GameResource} resource for the updated game
+     */
+    @PutMapping("/{gameId}")
+    @Operation(
+            summary = "Update a game",
+            description = "Update a game with the provided details"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Game updated"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+    })
+    public ResponseEntity<GameResource> updateGame(@PathVariable Long gameId, @RequestBody UpdateGameResource resource){
+        var updateGameCommand = UpdateGameCommandFromResourceAssembler.ToCommandFromResource(gameId, resource);
+        var updatedGame = gameCommandService.handle(updateGameCommand);
+        if (updatedGame.isEmpty()) return ResponseEntity.notFound().build();
+        var updatedGameEntity = updatedGame.get();
+        var updatedGameResource = GameResourceFromEntityAssembler.toResourceFromEntity(updatedGameEntity);
+        return ResponseEntity.ok(updatedGameResource);
+    }
+
+    /**
+     * Delete a game
+     *
+     * @param gameId The game id
+     * @return The response entity
+     */
+    @DeleteMapping("/{gameId}")
+    @Operation(
+            summary = "Delete a game",
+            description = "Delete a game with the provided ID"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Game deleted"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+    })
+    public ResponseEntity<?> deleteGame(@PathVariable Long gameId) {
+        var deleteGameCommand = new DeleteGameCommand(gameId);
+        gameCommandService.handle(deleteGameCommand);
+        return ResponseEntity.ok("Game with given id successfully deleted");
     }
 }

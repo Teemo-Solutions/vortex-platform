@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findByTitleContainingIgnoreCase(String title);
     Optional<Game> findByTitleAndDeveloper(String title, String developer);
+    boolean existsByTitleAndIdIsNot(String title, Long id);
 }
