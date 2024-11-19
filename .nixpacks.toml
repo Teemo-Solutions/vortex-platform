@@ -1,0 +1,10 @@
+[build]
+commands = [
+    "chmod +x ./mvnw",          # Grant execute permission to mvnw
+    "./mvnw clean install"      # Build the project using the Maven wrapper
+]
+
+[start]
+commands = [
+    "java -Dserver.port=$PORT -jar target/*.jar"  # Start the Spring Boot app
+]
