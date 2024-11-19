@@ -1,7 +1,8 @@
-package com.acme.vortex.platform.games.domain.services;
+package com.acme.vortex.platform.games.application.internal.commandservices;
 
 import com.acme.vortex.platform.games.domain.model.aggregates.Game;
 import com.acme.vortex.platform.games.domain.model.commands.CreateGameCommand;
+import com.acme.vortex.platform.games.domain.services.GameCommandService;
 import com.acme.vortex.platform.games.infrastructure.persistence.jpa.GameRepository;
 import org.springframework.stereotype.Service;
 
